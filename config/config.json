@@ -2,7 +2,7 @@
   "development": {
     "username": "root",
     "password": null,
-    "database": "proj2_db",
+    "database": "kidsincodeporated",
     "host": "localhost",
     "dialect": "mysql"
   },

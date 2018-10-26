@@ -1,30 +1,30 @@
-module.exports = (sequelize, DataTypes) => {
+module.exports = function(sequelize, DataTypes) {
   const Questions = sequelize.define("Questions", {
     id: {
-      type: DataTypes.INT,
+      type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true
     },
-    quiz_id: {
-      type: DataTypes.INT,
+    quizId: {
+      type: DataTypes.INTEGER,
       allowNull: false,
       validate: {
-        min: 1, max: 99
+        min: 1,
+        max: 99
       }
     },
     category: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        len: [1,45]
+        len: [1, 45]
       }
     },
     question: {
       type: DataTypes.TEXT,
-      allowNull: false,
+      allowNull: false
     },
     questionImageUrl: {
-      // ??? do we need this ? 
       type: DataTypes.STRING,
       allowNull: true
     },
@@ -46,4 +46,4 @@ module.exports = (sequelize, DataTypes) => {
     }
   });
   return Questions;
-}
+};

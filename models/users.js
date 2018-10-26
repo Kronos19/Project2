@@ -2,7 +2,7 @@
 module.exports = function(sequelize, DataTypes) {
   const Users = sequelize.define("Users", {
     id: {
-      type: DataTypes.INT,
+      type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true
     }, 
@@ -12,6 +12,14 @@ module.exports = function(sequelize, DataTypes) {
       validate: {
         len: [1, 45]
       }
+    },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    hash: {
+      type: DataTypes.STRING,
+      allowNull: false
     },
     correct: {
       type: DataTypes.TEXT,
