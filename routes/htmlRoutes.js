@@ -18,9 +18,14 @@ module.exports = function (app) {
     }
     res.sendFile(path.join(__dirname, "../public/login.html"));
   });
-  // Here we've add our isAuthenticated middleware to this route.
-  // If a user who is not logged in tries to access this route they will be redirected to the signup page
+
   app.get("/members", isAuthenticated, function (req, res) {
     res.sendFile(path.join(__dirname, "../public/members.html"));
+
+    // Render 404 page for any unmatched routes
+    app.get("*", function (req, res) {
+      console.log("hit the star route");
+      res.render("404");
+    });
   });
-};
+}
