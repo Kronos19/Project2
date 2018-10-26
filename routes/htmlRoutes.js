@@ -22,6 +22,7 @@ module.exports = function(app) {
 
   // Render 404 page for any unmatched routes
   app.get("*", function(req, res) {
+    console.log("hit the star route");
     res.render("404");
   });
 };
