@@ -138,10 +138,10 @@
 1. Using Express - `express` `require` `syntax`
 
     :question: To use the installed Express framework, it can be brought into the application with the code:
-    * ```var express = require('express');``` :white_check_mark:
-    * ```var express = include('express');```
-    * ```var express = node('express');```
-    * ```var express = node('server.js');```
+    * `var express = require('express');` :white_check_mark:
+    * `var express = include('express');`
+    * `var express = node('express');`
+    * `var express = node('server.js');`
 
 
 ### 14 
@@ -219,7 +219,7 @@
 
 1. Parameter modification - `parameters` `syntax`
 
-    :question: A route is defined as ```/route/:word?```. The parameter, word, in this case is ___.
+    :question: A route is defined as `/route/:word?`. The parameter, word, in this case is ___.
     * required
     * lower case
     * upper case
@@ -242,10 +242,10 @@
 1. Directory path - `__directory` `vocab`
 
     :question: The ___ keyword is built into Node and evaluates to the absolute path of the current directory.
-    * ```__dirname``` :white_check_mark:
-    * ```__path```
-    * ```$PATH```
-    * ```_currentPath```
+    * `__dirname` :white_check_mark:
+    * `__path`
+    * `$PATH`
+    * `_currentPath`
 
 
 ### 22 

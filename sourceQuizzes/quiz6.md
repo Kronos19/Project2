@@ -154,7 +154,7 @@
 
 1. Node FS package - `fs` `Node` `vocab`
 
-    :question: The internal Node package ```fs``` is used for ___.
+    :question: The internal Node package `fs` is used for ___.
     * creating NPM packages
     * making AJAX requests
     * interacting with files :white_check_mark:
@@ -165,7 +165,7 @@
 
 1. Reading file data - `fs` `data.split` `syntax`
 
-    :question: The contents of the file data.txt are ```i,love,coding``` What will be the output of the code below?
+    :question: The contents of the file data.txt are `i,love,coding` What will be the output of the code below?
     ```JavaScript
     var fs = require("fs");
     fs.readFile("data.txt", "utf8", function(err, data) {
@@ -173,17 +173,17 @@
         console.log(output);
     });
     ```
-    * ```i love coding```
-    * ```i,love,coding```
-    * ```['i', 'love', 'coding']``` :white_check_mark:
-    * ```{data: "i, love, coding"}```
+    * `i love coding`
+    * `i,love,coding`
+    * `['i', 'love', 'coding']` :white_check_mark:
+    * `{data: "i, love, coding"}`
 
 
 ### 15 
 
 1. Adding to files - `fs` `tech-knowledge`
 
-    :question: The ___ method of the Node ```fs``` package is used to add content to an existing file.
+    :question: The ___ method of the Node `fs` package is used to add content to an existing file.
     * appendToFile
     * writeFile
     * continueFile
