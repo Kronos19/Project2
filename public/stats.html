@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Stats Page</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+    crossorigin="anonymous">
+</head>
+
+<body>
+  <div id="container">
+    <div class="row">
+      <div class="quiz_stats" id="container_left" class="col-4">
+        <!-- multi colored list -->
+        <div class="list-group">
+
+          <!-- Quiz#1 -->
+          <a href="#" class="list-group-item list-group-item-action">Dapibus ac facilisis in
+            <br>
+            <!-- progress bar -->
+            <div class="progress">
+              <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0"
+                aria-valuemax="100">25%</div>
+                <!-- add span tag for changing progress of bar -->
+            </div>
+          </a>
+
+          <!-- Quiz#2 -->
+          <a href="#" class="list-group-item list-group-item-action list-group-item-primary">A simple primary list
+            group item
+            <br>
+            <!-- progress bar -->
+            <div class="progress">
+              <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0"
+                aria-valuemax="100">25%
+                <!-- add span tag for changing progress of bar -->
+              </div>
+            </div>
+          </a>
+
+          <br>
+          <br>
+
+          <!--Total complete #quizes counter or fraction-->
+          <div>
+            <p>Total Quizes Completed: <span>(JQUERY for total number completed)</span></p>
+          </div>
+
+          <!-- list group end -->
+        </div>
+        <!-- quiz stats end -->
+      </div>
+
+      <div class="container_right" class="col-8">
+
+        <!-- div for User Info -->
+        <div id="row">
+          <div id="name">
+            Username: XXXXXXXXX Rank: XX (add span tag for jquery)
+          </div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="row">
+          <!-- col and row below name, next to container left -->
+          <button type="button" class="btn btn-primary" id="btn1">Quiz 1</button>
+          <button type="button" class="btn btn-primary" id="btn2">Quiz 2</button>
+        </div>
+
+        <!-- logout -->
+        <div id="row">
+          <button type="button" class="btn btn-primary" id="btn3">Primary</button>
+        </div>
+
+        <!-- div container left -->
+      </div>
+
+      <!-- div whole row -->
+    </div>
+
+    <!-- div whole container -->
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+  <script>
+    $("btn1").on("click", function() {
+      // call api html route for page, 
+    });
+  </script>
+</body>
+
+</html>
