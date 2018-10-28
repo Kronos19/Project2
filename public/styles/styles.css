@@ -234,7 +234,7 @@ body {
 @keyframes show {
   from {transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);}
   to {transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg);}
-}
+};
 
 
 
