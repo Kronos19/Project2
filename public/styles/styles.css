@@ -56,7 +56,7 @@ body {
   }
 };
 
-html, body {
+/* html, body {
   height: 100%;
   margin: 0;
 }
@@ -159,7 +159,82 @@ html, body {
   to {
     bottom: 100%;
   }
-};
+}; */
+
+
+#container {
+  width: 50vw;
+  height: 50vh;
+  max-width: 50vh;
+  max-height: 50vw;
+  background-color: white;
+  position: absolute; float: left;
+  margin: auto;
+  left: 0; right: 0; top: 0; bottom: 0;
+  perspective: 750px;
+}
+.cube {
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  transform-style: preserve-3d;
+  background-color: #333;
+  backface-visibility: hidden;
+}
+.cube div {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  margin: auto;
+  left: 0; right: 0; top: 0; bottom: 0;
+  display: block;
+  border-radius: 5%;
+  background-color: #000;
+  backface-visibility: hidden;
+}
+.cube div::after {
+  content: "";
+  width: 90%;
+  height: 90%;
+  position: absolute;
+  margin: auto;
+  left: 0; right: 0; top: 0; bottom: 0;
+  display: block;
+  background-color: black;
+  border-radius: 5%;
+  backface-visibility: hidden;
+}
+.cube .front  { transform: rotateY(   0deg ) translateZ( 32px ); }
+.cube .back   { transform: rotateX( 180deg ) translateZ( 32px ); }
+.cube .right  { transform: rotateY(  90deg ) translateZ( 32px ); }
+.cube .left   { transform: rotateY( -90deg ) translateZ( 32px ); }
+.cube .top    { transform: rotateX(  90deg ) translateZ( 32px ); }
+.cube .bottom { transform: rotateX( -90deg ) translateZ( 32px ); }
+.red .front::after  { background-color: purple; }
+.red .back::after   { background-color: yellow; }
+.red .right::after  { background-color: blue; }
+.red .left::after   { background-color: #393; }
+.red .top::after    { background-color: #fff; }
+.red .bottom::after { background-color: orange; }
+.rubikscube {
+  width: 33%;
+  height: 33%;
+  position: absolute;
+  margin: auto;
+  left: 0; right: 0; top: 0; bottom: 0;
+  -webkit-animation: show 10s linear 0s infinite;
+  animation: show 10s linear 0s infinite;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+@-webkit-keyframes show {
+  from {-webkit-transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);}
+  to {-webkit-transform: rotateX(360deg) rotateY(720deg) rotateZ(720deg);}
+}
+@keyframes show {
+  from {transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);}
+  to {transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg);}
+}
 
 
 
