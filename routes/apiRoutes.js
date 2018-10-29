@@ -1,3 +1,5 @@
+//todo: add error handling to routes?
+
 var db = require("../models");
 
 module.exports = function(app) {
@@ -21,6 +23,17 @@ module.exports = function(app) {
   // view all questions
   app.get("/api/newquest", (req, res) => {
     db.Questions.findAll().then(data => {
+      res.json(data);
+    });
+  });
+
+  // get a question where quizId = x
+  app.get("/api/quiz/:quizId", (req, res) => {
+    db.Questions.findAll({
+      where: {
+        quizId: req.params.quizId
+      }
+    }).then(data => {
       res.json(data);
     });
   });

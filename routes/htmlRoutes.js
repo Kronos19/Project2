@@ -24,6 +24,12 @@ module.exports = function(app) {
     });
   });
 
+  app.get("/quiz/:quizId", (req, res) => {
+    res.render("questions", {
+      quiz: req.params.quizId
+    });
+  });
+
   // Render 404 page for any unmatched routes
   app.get("*", function(req, res) {
     console.log("hit the star route");
