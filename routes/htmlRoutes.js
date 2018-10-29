@@ -1,4 +1,5 @@
 var db = require("../models");
+const path = require("path");
 
 module.exports = function(app) {
   // Load index page
@@ -22,6 +23,11 @@ module.exports = function(app) {
         example: dbExample
       });
     });
+  });
+
+  // To load the stats.html page
+  app.get("/stats", function(req, res) {
+    res.sendFile(path.join(__dirname, "/../public/stats.html"));
   });
 
   // Render 404 page for any unmatched routes
