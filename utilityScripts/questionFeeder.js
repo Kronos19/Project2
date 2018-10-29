@@ -1,10 +1,6 @@
 const fs = require("fs");
 const request = require("request");
-
 const url = "http://localhost:3000/api/newquest";
-
-
-
 const topics = [
   "console/bash",
   "html/css/git",
@@ -15,7 +11,7 @@ const topics = [
   "Express"
 ];
 
-function readAndParseQuiz(quizNumber, topic) {
+function readAndParseQuiz(quizNumber) {
   let fp = "../sourceQuizzes/quiz" + quizNumber + ".md";
   fs.readFile(fp, "utf8", (err, data) => {
     if (err) {
@@ -25,10 +21,9 @@ function readAndParseQuiz(quizNumber, topic) {
     for (let i = 0; i < chunks.length; i++) {
       const qObj = {
         quizId: quizNumber,
-        category: topic,
+        category: topics[quizNumber - 1],
         codeBlock: null
       };
-      // remove if statement and start incrementer at 1?
       if (chunks[i].split(":question: ")[1]) {
         let qas = chunks[i].split(":question: ")[1]; // question & answers
         if (qas.includes("```")) {
@@ -51,9 +46,12 @@ function readAndParseQuiz(quizNumber, topic) {
         request.post(url).form(qObj);
       }
     }
+    if (quizNumber < 7) {
+      setTimeout(() => {
+        readAndParseQuiz(quizNumber + 1);
+      }, 1000);
+    }
   });
 }
 
-for (let i = 1; i < 8; i++) {
-  readAndParseQuiz(i, topics[i]);
-}
+readAndParseQuiz(1);
