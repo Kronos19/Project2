@@ -3,9 +3,12 @@
     <div class="col-md-4">
       <p>This is quiz <span id="quiz-id">{{quiz}}</span></p>
       <p>
-        This is where we will display information 
-        about your stats for the current session
+        Your answer for the last question was <span id="last-result"></span>
       </p>
+      <h5>The last question was:</h5>
+      <p id="last-question"></p>
+      <h5>The correct answer was:</h5>
+      <p id="last-correct"></p>
     </div>
     <div class="col-md-6">
       <div id="question-container">
@@ -27,33 +30,47 @@
         <p id="choice3">CHOICE 3</p>
         <p id="choice4">CHOICE 4 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus natus, maxime ipsum quae officia repellat id soluta dolores fuga est similique reprehenderit nihil necessitatibus quas commodi quo ullam perspiciatis illo?</p>
       </div>
-      <button class="btn btn-danger" id="sub-btn">Submit your answer!</button>
     </div>
-    <div class="col-md-2"></div>
+    <div class="col-md-2">
+      <p>Correct: <span id="correct-display">0</span></p>
+      <p>Incorrect: <span id="incorrect-display">0</span></p>
+    </div>
 
   </div>
 </div>
 <script
   src="https://code.jquery.com/jquery-3.3.1.min.js"
  ></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.5.1/marked.min.js"></script>
 <script>
-  // TODO: need error handling for incorrect quizId
+  // TODO: 
+  // display last question result
+  // submit data to server
+  // handle possible incorrect quizId
+  // BUG: four answer choices dont display on questions with code snippets
   const quizId = document.querySelector("#quiz-id").textContent;
   const questionDisplay = document.querySelector("#question-container");
   const codeBlockDisplay = document.querySelector("#code-block-container");
   const answerDisplay = document.querySelector("#answers-container");
+  const correctDisplay = document.querySelector("#correct-display");
+  const incorrectDisplay = document.querySelector("#incorrect-display");
+  const lastResultDisplay = document.querySelector("#last-result");
+  const lastQuestionDisplay = document.querySelector("#last-question");
+  const lastCorrectDisplay = document.querySelector("#last-correct");
   let questIndex = 0;
   let positionOfCorrectAnswer;
-  let quests; // dont think ill need this
-  let dataReady = false;
+  let quests;
+  let numberCorrect = 0;
+  let numberIncorrect = 0;
   
   function getQuizQuestions(quizId) {
+    console.log("getQuizQuestionsCalled");
     $.ajax({
       type: "GET",
       url: "../api/quiz/" + quizId
     }).then((data)=>{
       console.log(data);
-      quests = data; // ??? dont think ill need this
+      quests = data;
       displayNew(data, questIndex);
     }).catch((err)=>{
       console.log(err);
@@ -62,16 +79,18 @@
 
   // main display functions
   function displayNew(quests, index){
+    console.log("displayNewCalled");
     clearChildren(questionDisplay);
     clearChildren(codeBlockDisplay);
     clearChildren(answerDisplay);
     writeQuestionToPage(quests[index]);
     writeAnswersToPage(quests[index]);
     if (quests[index].codeBlock) writeCodeBlockToPage(quests[index]);
-    questIndex++;
+    
   }
 
   function writeQuestionToPage(q) {
+    console.log("write question to page called");
     const paragraph = document.createElement("p");
     paragraph.textContent = q.question;
     questionDisplay.appendChild(paragraph);
@@ -79,6 +98,7 @@
 
   function writeAnswersToPage(q) {
     // pick random spot for correct answer
+    console.log("write answers to page called");
     positionOfCorrectAnswer = Math.floor(Math.random() * 4);
     const ansArr = [q.correct, q.incorrect1, q.incorrect2, q.incorrect3];
     swapElements(ansArr, 0, positionOfCorrectAnswer);
@@ -88,17 +108,39 @@
       answerChoice.textContent = ansArr[i];
       answerChoice.classList.add("answer-choice"); // to add css later
       answerChoice.addEventListener("click",(e)=>{
-        console.log(e.target.value);
-        console.log(e.target.value == positionOfCorrectAnswer);
         handleAnswer(e.target.value);
-      })
+      });
       answerDisplay.appendChild(answerChoice);
     }
   }
 
+  function writeCodeBlockToPage(q) {
+    const block = document.createElement("code");
+    block.textContent = q.codeBlock;
+    codeBlockDisplay.appendChild(block);
+  }
+
   function handleAnswer(choice){
-    console.log("choice was: ", choice);
-    displayNew(quests, questIndex);
+    console.log("handleAnswered call, choice and poca: ", choice, positionOfCorrectAnswer);
+    let answerWasCorrect = choice == positionOfCorrectAnswer;
+    sendData(quests[questIndex].id, answerWasCorrect)
+    choice == positionOfCorrectAnswer ? numberCorrect++ : numberIncorrect++;
+    correctDisplay.textContent = numberCorrect;
+    incorrectDisplay.textContent = numberIncorrect;
+    // set feedback
+    
+
+    //display new
+    displayNew(quests, ++questIndex);
+  }
+
+  function sendData(questionId, answerWasCorrect){
+    console.log("sendData called");
+  }
+  function setFeedback(question, correctAns, answerWasCorrect){
+    console.log("setFeedback called")
+    //lastResultDisplay, lastQuestionDisplay, lastCorrectDisplay
+    lastResultDisplay
   }
 
   // utility functions
