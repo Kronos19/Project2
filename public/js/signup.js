@@ -15,9 +15,6 @@ $(document).ready(function () {
     // append password to form (password: '12345')
     formData.append("password", passwordInput.val().trim());
     
-    // if (!userData.email || !userData.password) {
-    //   return;
-    // }
     // If we have an email and password, run the signUpUser function
     signUpUser(formData);
     emailInput.val("");

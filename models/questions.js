@@ -24,8 +24,8 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.TEXT,
       allowNull: false
     },
-    questionImageUrl: {
-      type: DataTypes.STRING,
+    codeBlock: {
+      type: DataTypes.TEXT,
       allowNull: true
     },
     correct: {

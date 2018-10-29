@@ -21,11 +21,18 @@ module.exports = function (app) {
 
   app.get("/members", isAuthenticated, function (req, res) {
     res.sendFile(path.join(__dirname, "../public/members.html"));
+  })
+   
 
-    // Render 404 page for any unmatched routes
-    app.get("*", function (req, res) {
-      console.log("hit the star route");
-      res.render("404");
+  app.get("/quiz/:quizId", (req, res) => {
+    res.render("questions", {
+      quiz: req.params.quizId
     });
+  });
+
+   // Render 404 page for any unmatched routes
+   app.get("*", function (req, res) {
+    console.log("hit the star route");
+    res.render("404");
   });
 }
