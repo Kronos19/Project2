@@ -17,10 +17,7 @@ module.exports = function(app) {
         id: req.body.userId
       }
     }).then(data => {
-      console.log("line 20");
-      console.log(data.id, "user-", data.username);
-      console.log("line 22");
-      console.log(data.correct);
+      console.log(data);
     }).catch(err => {
       console.log(err);
     });
@@ -63,6 +60,8 @@ module.exports = function(app) {
       res.json(data);
     });
   });
+
+  
 
   // create a new user
   app.post("/api/signup", function (req, res) {
