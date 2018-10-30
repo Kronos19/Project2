@@ -105,7 +105,7 @@
       let answerChoice = document.createElement("p");
       answerChoice.value = i;
       answerChoice.textContent = ansArr[i];
-      answerChoice.classList.add("answer-choice"); // to add css later
+      answerChoice.classList.add("answer-choice");
       answerChoice.addEventListener("click",(e)=>{
         handleAnswer(e.target.value);
       });
@@ -136,6 +136,7 @@
   function sendData(questionId, answerWasCorrect){
     console.log("sendData called");
     const outboundData = {
+      userId: 1,
       id: questionId,
       result: answerWasCorrect ? "correct" : "incorrect"
     }
@@ -149,7 +150,6 @@
   }
   function setFeedback(q, answerWasCorrect){
     console.log("setFeedback called")
-    //lastResultDisplay, lastQuestionDisplay, lastCorrectDisplay
     lastResultDisplay.textContent = answerWasCorrect;
     lastQuestionDisplay.textContent = q.question;
     lastCorrectDisplay.textContent = q.correct;

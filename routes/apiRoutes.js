@@ -4,23 +4,16 @@
 var db = require("../models");
 
 module.exports = function(app) {
-  // Get all examples
-  app.get("/api/examples", function(req, res) {
-    db.Example.findAll({}).then(function(dbExamples) {
-      res.json(dbExamples);
-    });
-  });
-
-  // Create a new example
-  app.post("/api/examples", function(req, res) {
-    db.Example.create(req.body).then(function(dbExample) {
-      res.json(dbExample);
-    });
-  });
-
   // route for submitting quiz question results
   app.post("/api/questions/result", (req, res) => {
     console.log(req.body);
+    db.Users.findOne({
+      where: {
+        id: req.body.userId
+      }
+    }).then(data => {
+      console.log(data);
+    });
     const jsonResponse = { msgFromServer: "Great job!!!" };
     res.json(jsonResponse);
   });
@@ -35,7 +28,7 @@ module.exports = function(app) {
     });
   });
 
-  // get a question where quizId = x
+  // get all question where quizId = x
   app.get("/api/quiz/:quizId", (req, res) => {
     db.Questions.findAll({
       where: {
