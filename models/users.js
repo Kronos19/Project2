@@ -5,7 +5,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true
-    }, 
+    },
     username: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -17,16 +17,13 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false
     },
-    hash: {
+    password: {
       type: DataTypes.STRING,
       allowNull: false
     },
     correct: {
-      type: DataTypes.TEXT,
-    },
-    incorrect: {
       type: DataTypes.TEXT
-    },
+    }
   });
   return Users;
-}
+};
