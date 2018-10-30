@@ -3,6 +3,11 @@
 
 var db = require("../models");
 
+// grab current users correct string
+// parse it
+// if incoming qId is already in the string then do nothing
+// if its not then add it, in order
+
 module.exports = function(app) {
   // route for submitting quiz question results
   app.post("/api/questions/result", (req, res) => {
@@ -12,7 +17,8 @@ module.exports = function(app) {
         id: req.body.userId
       }
     }).then(data => {
-      console.log(data);
+      console.log(data.id, "user-", data.username);
+      console.log(data.correct);
     });
     const jsonResponse = { msgFromServer: "Great job!!!" };
     res.json(jsonResponse);
