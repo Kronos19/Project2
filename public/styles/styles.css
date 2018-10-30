@@ -1,11 +1,25 @@
+@font-face {
+  font-family: myFirstFont;
+  src: url(/styles/fonts/PPETRIAL.ttf)
+}
+div {
+  font-family: myFirstFont;
+}
+
 .list-group-item {
   line-height: 2.5;
 }
 
 
+*, *:before, *:after {border-color: orange;
+  border-style: border-box;
+  border-width: 200px;
+  
+}
+
 body {
-  font-family: 'Lucida Grande', 'Helvetica Neue', sans-serif;
-  font-size: 13px;
+  font-size: 21px; color: purple;
+  font-color: purple;
   background: rgb(182, 255, 47);
   transition:all .8s ease-in-out;  
 }
@@ -236,6 +250,17 @@ body {
   to {transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg);}
 };
 
+p, h5 {
+  padding:2px;
+  border:7px solid #FFA11B;
+  background-color: #FFC71B;
+  vertical-align:middle;
+  color:835600;
+  margin-left:auto;
+  margin-right:auto;
+  text-align:center;
+  width: 300px; /* You need a width if you're going to use auto margins */
+ }
 
 /* testing */
 
