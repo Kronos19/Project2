@@ -1,4 +1,6 @@
 var db = require("../models");
+const path = require("path");
+const sql = require("sequelize");
 
 module.exports = function(app) {
   // Load index page
@@ -24,6 +26,54 @@ module.exports = function(app) {
     });
   });
 
+
+
+  // // To load the stats handlebars page for stats
+  app.get("/stats", function(req, res) {
+
+    db.find(... = ...)
+
+    db.Post.findAll({
+      where: {
+        category: req.params.category
+      }
+    })
+
+    //call ID
+
+//the information we have to identify the correct answers for questions in a quiz are the primary key id for the question in said quiz in the db questions table and the string correct or incorrect depending on the answer
+
+//make a if stmt for whether the
+
+
+    //answer corect is a boolean, then check how many "true" for each 
+    //query user info
+    //then do math for this
+
+
+    // res.render("stats", {
+    //   quizOneProgress: 60
+    // });
+
+  // //for updating the progress bar with handlebars
+  // $(".progress-bar").each(function(){
+  //   console.log($(this).attr("aria-valuenow"));
+   
+  //       //for each quiz id
+  //       //for each question id
+  //       //if question correct then add % 1/?? total of question.length
+  
+  // });
+  
+  // });
+
+  //old code to render stats page
+  app.get("/stats", function(req, res) {
+    res.render("stats");
+
+
+
+    //get to the quiz page
   app.get("/quiz/:quizId", (req, res) => {
     res.render("questions", {
       quiz: req.params.quizId
@@ -34,5 +84,6 @@ module.exports = function(app) {
   app.get("*", function(req, res) {
     console.log("hit the star route");
     res.render("404");
+  });
   });
 };
