@@ -1,4 +1,5 @@
 // do we need a field for hashed passwords?
+var bcrypt = require("bcrypt-nodejs");
 module.exports = function(sequelize, DataTypes) {
   var Users = sequelize.define("Users", {
     id: {

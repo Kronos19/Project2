@@ -3,9 +3,9 @@ var isAuthenticated = require("../config/middleware/isAuthenticated");
 var path = require("path");
 
 module.exports = function (app) {
-  app.get("/", function (req, res) {
+  app.get("/signup", function (req, res) {
     // If the user already has an account send them to the members page
-    if (req.user) {
+    if (req.users) {
       return res.redirect("/members");
     }
     res.sendFile(path.join(__dirname, "../public/signup.html"));
@@ -13,14 +13,14 @@ module.exports = function (app) {
 
   app.get("/login", function (req, res) {
     // If the user already has an account send them to the members page
-    if (req.user) {
+    if (req.users) {
       return res.redirect("/members");
     }
     res.sendFile(path.join(__dirname, "../public/login.html"));
   });
 
   app.get("/members", isAuthenticated, function (req, res) {
-    if (!req.user) {
+    if (!req.users) {
       return res.redirect("/");   
     }
     res.sendFile(path.join(__dirname, "../public/members.html"));
@@ -36,6 +36,6 @@ module.exports = function (app) {
    // Render 404 page for any unmatched routes
    app.get("*", function (req, res) {
     console.log("hit the star route");
-    res.render("404");
+    res.render("404.handlebars");
   });
 }

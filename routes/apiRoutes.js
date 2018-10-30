@@ -1,6 +1,6 @@
 //todo: add error handling to routes?
 // 1x3-2x0-3x4-4x2
-
+var formidable = require('formidable');
 var db = require("../models");
 
 module.exports = function(app) {
@@ -62,21 +62,34 @@ module.exports = function(app) {
   });
 
   // create a new user
-  app.post("/signup", (req, res) => {
-    console.log("hit the api/newuser POST route");
-    db.users.create(req.body).then(data => {
-      res.json(data);
-    });
-  });
+  app.post("/api/signup", function (req, res) {
 
-  //end db testing routes-----------------------------
-  //--------------------------------------------------
+    // Create a new instance of formidable to handle the request info
+    var form = new formidable.IncomingForm();
 
-  app.delete("/api/examples/:id", function(req, res) {
-    db.Example.destroy({
-      where: { id: req.params.id }
-    }).then(function(dbExample) {
-      res.json(dbExample);
+    // parse information for form fields and incoming files
+    form.parse(req, function (err, fields) {
+      console.log(fields);
+
+        db.Users.create({
+          email: fields.email,
+          password: fields.password,
+          username: fields.username,
+        }).then(function () {
+         // Upon successful signup, log user in
+         req.login(userInfo, function (err) {
+           if (err) {
+             console.log(err)
+             return res.status(422).json(err);
+           }
+           console.log(req.user);
+           return res.json("/members");
+         });
+        }).catch(function (err) {
+          console.log(err);
+          res.status(422).json(err);
+        });
     });
+
   });
 };
