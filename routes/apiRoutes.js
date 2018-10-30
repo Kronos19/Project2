@@ -3,17 +3,17 @@
 var formidable = require('formidable');
 var db = require("../models");
 
-module.exports = function(app) {
+module.exports = function (app) {
   // Get all examples
-  app.get("/api/examples", function(req, res) {
-    db.Example.findAll({}).then(function(dbExamples) {
+  app.get("/api/examples", function (req, res) {
+    db.Example.findAll({}).then(function (dbExamples) {
       res.json(dbExamples);
     });
   });
 
   // Create a new example
-  app.post("/api/examples", function(req, res) {
-    db.Example.create(req.body).then(function(dbExample) {
+  app.post("/api/examples", function (req, res) {
+    db.Example.create(req.body).then(function (dbExample) {
       res.json(dbExample);
     });
   });
@@ -21,7 +21,9 @@ module.exports = function(app) {
   // route for submitting quiz question results
   app.post("/api/questions/result", (req, res) => {
     console.log(req.body);
-    const jsonResponse = { msgFromServer: "Great job!!!" };
+    const jsonResponse = {
+      msgFromServer: "Great job!!!"
+    };
     res.json(jsonResponse);
   });
 
@@ -71,25 +73,46 @@ module.exports = function(app) {
     form.parse(req, function (err, fields) {
       console.log(fields);
 
-        db.Users.create({
-          email: fields.email,
-          password: fields.password,
-          username: fields.username,
-        }).then(function () {
-         // Upon successful signup, log user in
-         req.login(userInfo, function (err) {
-           if (err) {
-             console.log(err)
-             return res.status(422).json(err);
-           }
-           console.log(req.user);
-           return res.json("/members");
-         });
-        }).catch(function (err) {
-          console.log(err);
-          res.status(422).json(err);
+      db.Users.create({
+        email: fields.email,
+        password: fields.password,
+        username: fields.username,
+      }).then(function (userInfo) {
+        // Upon successful signup, log user in
+        req.login(userInfo, function (err) {
+          if (err) {
+            console.log(err)
+            return res.status(422).json(err);
+          }
+          console.log(req.user);
+          return res.json("/members");
         });
+      }).catch(function (err) {
+        console.log(err);
+        res.status(422).json(err);
+      });
     });
 
+  });
+
+  app.get("/logout", function (req, res) {
+    req.logout();
+    res.redirect("/");
+  });
+
+  // Route for getting some data about our user to be used client side
+  app.get("/api/user_data", function (req, res) {
+    if (!req.user) {
+      // The user is not logged in, send back an empty object
+      res.json({});
+    } else {
+      // Otherwise send back the user's email and id
+      // Sending back a password, even a hashed password, isn't a good idea
+      res.json({
+        email: req.user.email,
+        id: req.user.id,
+        photo: req.user.photo
+      });
+    }
   });
 };
