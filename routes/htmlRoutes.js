@@ -20,6 +20,9 @@ module.exports = function (app) {
   });
 
   app.get("/members", isAuthenticated, function (req, res) {
+    if (!req.user) {
+      return res.redirect("/");   
+    }
     res.sendFile(path.join(__dirname, "../public/members.html"));
   })
    

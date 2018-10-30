@@ -54,9 +54,9 @@ module.exports = function(app) {
   });
 
   // create a new user
-  app.post("/api/newuser", (req, res) => {
+  app.post("/signup", (req, res) => {
     console.log("hit the api/newuser POST route");
-    db.Users.create(req.body).then(data => {
+    db.users.create(req.body).then(data => {
       res.json(data);
     });
   });
