@@ -46,9 +46,9 @@
  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.5.1/marked.min.js"></script>
 <script>
   // TODO: 
-  // display last question result
   // submit data to server
   // handle possible incorrect quizId
+  // fix answerWasCorrect msg
   // BUG: four answer choices dont display on questions with code snippets
   const quizId = document.querySelector("#quiz-id").textContent;
   const questionDisplay = document.querySelector("#question-container");
@@ -88,7 +88,6 @@
     writeQuestionToPage(quests[index]);
     writeAnswersToPage(quests[index]);
     if (quests[index].codeBlock) writeCodeBlockToPage(quests[index]);
-    
   }
 
   function writeQuestionToPage(q) {
@@ -126,11 +125,11 @@
     console.log("handleAnswered call, choice and poca: ", choice, positionOfCorrectAnswer);
     let answerWasCorrect = choice == positionOfCorrectAnswer;
     sendData(quests[questIndex].id, answerWasCorrect)
-    choice == positionOfCorrectAnswer ? numberCorrect++ : numberIncorrect++;
+    answerWasCorrect ? numberCorrect++ : numberIncorrect++;
     correctDisplay.textContent = numberCorrect;
     incorrectDisplay.textContent = numberIncorrect;
     // set feedback
-    
+    setFeedback(quests[questIndex], answerWasCorrect);
 
     //display new
     displayNew(quests, ++questIndex);
@@ -138,11 +137,24 @@
 
   function sendData(questionId, answerWasCorrect){
     console.log("sendData called");
+    const outboundData = {
+      id: questionId,
+      result: answerWasCorrect ? "correct" : "incorrect"
+    }
+    $.ajax({
+      type: "POST",
+      url: "../api/questions/result",
+      data: outboundData
+    }).then((res)=>{
+      console.log(res);
+    });
   }
-  function setFeedback(question, correctAns, answerWasCorrect){
+  function setFeedback(q, answerWasCorrect){
     console.log("setFeedback called")
     //lastResultDisplay, lastQuestionDisplay, lastCorrectDisplay
-    lastResultDisplay
+    lastResultDisplay.textContent = answerWasCorrect;
+    lastQuestionDisplay.textContent = q.question;
+    lastCorrectDisplay.textContent = q.correct;
   }
 
   // utility functions
