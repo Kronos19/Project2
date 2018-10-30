@@ -23,13 +23,6 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false
     },
     correct: {
-<<<<<<< HEAD
-      type: DataTypes.TEXT
-    }
-  });
-  return Users;
-};
-=======
       type: DataTypes.TEXT,
       allowNull: true,
     },
@@ -49,4 +42,3 @@ module.exports = function(sequelize, DataTypes) {
     });
     return Users;
 }
->>>>>>> ed8b07c2496db4f7d20ed5b3e6d3affdfcc4ef33

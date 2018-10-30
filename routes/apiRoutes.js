@@ -3,33 +3,15 @@
 var formidable = require('formidable');
 var db = require("../models");
 
-<<<<<<< HEAD
 // grab current users correct string
 // parse it
 // if incoming qId is already in the string then do nothing
 // if its not then add it, in order
-=======
-module.exports = function (app) {
-  // Get all examples
-  app.get("/api/examples", function (req, res) {
-    db.Example.findAll({}).then(function (dbExamples) {
-      res.json(dbExamples);
-    });
-  });
-
-  // Create a new example
-  app.post("/api/examples", function (req, res) {
-    db.Example.create(req.body).then(function (dbExample) {
-      res.json(dbExample);
-    });
-  });
->>>>>>> ed8b07c2496db4f7d20ed5b3e6d3affdfcc4ef33
 
 module.exports = function(app) {
   // route for submitting quiz question results
   app.post("/api/questions/result", (req, res) => {
     console.log(req.body);
-<<<<<<< HEAD
     db.Users.findOne({
       where: {
         id: req.body.userId
@@ -39,11 +21,6 @@ module.exports = function(app) {
       console.log(data.correct);
     });
     const jsonResponse = { msgFromServer: "Great job!!!" };
-=======
-    const jsonResponse = {
-      msgFromServer: "Great job!!!"
-    };
->>>>>>> ed8b07c2496db4f7d20ed5b3e6d3affdfcc4ef33
     res.json(jsonResponse);
   });
 
