@@ -4,6 +4,12 @@ var path = require("path");
 const sql = require("sequelize");
 
 module.exports = function (app) {
+  app.get("/", function(req, res) {
+      res.render("index", {
+        msg: "Welcome!"
+      });
+    
+  });
   app.get("/signup", function (req, res) {
     // If the user already has an account send them to the members page
     if (req.user) {

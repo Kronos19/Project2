@@ -17,8 +17,12 @@ module.exports = function(app) {
         id: req.body.userId
       }
     }).then(data => {
+      console.log("line 20");
       console.log(data.id, "user-", data.username);
+      console.log("line 22");
       console.log(data.correct);
+    }).catch(err => {
+      console.log(err);
     });
     const jsonResponse = { msgFromServer: "Great job!!!" };
     res.json(jsonResponse);
