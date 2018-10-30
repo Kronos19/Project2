@@ -39,16 +39,21 @@ module.exports = function(app) {
       }
     })
 
-    //answer corect is a boolean, then check how many "true" for each 
+    //call ID
 
+//the information we have to identify the correct answers for questions in a quiz are the primary key id for the question in said quiz in the db questions table and the string correct or incorrect depending on the answer
+
+//make a if stmt for whether the
+
+
+    //answer corect is a boolean, then check how many "true" for each 
     //query user info
     //then do math for this
 
 
-
-    res.render("stats", {
-      quizOneProgress: 60
-    });
+    // res.render("stats", {
+    //   quizOneProgress: 60
+    // });
 
   // //for updating the progress bar with handlebars
   // $(".progress-bar").each(function(){
