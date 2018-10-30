@@ -2,6 +2,7 @@
 // 1x3-2x0-3x4-4x2
 var formidable = require('formidable');
 var db = require("../models");
+var passport = require("passport");
 
 module.exports = function (app) {
   // Get all examples
@@ -63,6 +64,13 @@ module.exports = function (app) {
     });
   });
 
+  app.post("/api/login", passport.authenticate("local"), function (req, res) {
+    console.log(req.user);
+    console.log("hi");
+    
+    res.json("/members");
+  });
+
   // create a new user
   app.post("/api/signup", function (req, res) {
 
@@ -111,7 +119,7 @@ module.exports = function (app) {
       res.json({
         email: req.user.email,
         id: req.user.id,
-        photo: req.user.photo
+        username: req.user.username,
       });
     }
   });
