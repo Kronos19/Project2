@@ -128,7 +128,7 @@
         <!-- Buttons row 1 -->
         <div class="row justify-content-center">
           <!-- col and row below name, next to container left -->
-          <button type="button" class="btn btn-primary m-1 p-2" id="quiz1">Quiz 1</button>
+          <button type="button" class="btn btn-primary m-1 p-2" id="quiz1" onclick="window.location.href='/quiz1'">Quiz 1</button>
           <button type="button" class="btn btn-primary m-1 p-2" id="quiz2">Quiz 2</button>
           <button type="button" class="btn btn-primary m-1 p-2" id="quiz3">Quiz 3</button>
         </div>
@@ -162,30 +162,7 @@
 
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
     crossorigin="anonymous"></script>
-  {{!-- <script>
-    //this would go with the login page, already have the route set up on the htmlRoutes.js
-
-    // $("btn1").on("click", function() {
-    //   // call api html route for page, 
-    // });
-
-    //progress bar for each quiz (use counter based on the count of questions complete in the sql db, and every time the page is reloaded refresh the progress bar/ and every time a bar is pressed reload the indivual db)
-    //have it be a for loop to go through the progress of each quiz that updates when the page is called on
-    //need to require the js page for the login page...
-
-    // $("btn for sign in").on("click", function() {
-    //   //either for each or tag or for with a look into the tag
-      
-      
-      $("#reload").on("click", function() {
-        $(".progress-bar").each(function(){
-          console.log($(this).attr("aria-valuenow"));
-        });
-      });
-      
-      //maybe name each div, and set the attribute again each time
-
-    //   }
-    // }); --}}
+  <script>
+    
     
   </script>

@@ -28,7 +28,7 @@ module.exports = function(app) {
 
 
 
-  // To load the stats handlebars page for stats
+  // // To load the stats handlebars page for stats
   app.get("/stats", function(req, res) {
 
     db.find(... = ...)
@@ -39,8 +39,12 @@ module.exports = function(app) {
       }
     })
 
+    //answer corect is a boolean, then check how many "true" for each 
+
     //query user info
     //then do math for this
+
+
 
     res.render("stats", {
       quizOneProgress: 60
@@ -56,11 +60,11 @@ module.exports = function(app) {
   
   // });
   
-  });
+  // });
 
-  //old code to redner stats page
-  // app.get("/stats", function(req, res) {
-  //   res.render(path.join(__dirname, "/../public/stats.html"));
+  //old code to render stats page
+  app.get("/stats", function(req, res) {
+    res.render("stats");
 
 
 
@@ -75,5 +79,6 @@ module.exports = function(app) {
   app.get("*", function(req, res) {
     console.log("hit the star route");
     res.render("404");
+  });
   });
 };
