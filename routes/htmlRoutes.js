@@ -1,5 +1,6 @@
 var db = require("../models");
 const path = require("path");
+const sql = require("sequelize");
 
 module.exports = function(app) {
   // Load index page
@@ -25,9 +26,49 @@ module.exports = function(app) {
     });
   });
 
-  // To load the stats.html page
+
+
+  // To load the stats handlebars page for stats
   app.get("/stats", function(req, res) {
-    res.sendFile(path.join(__dirname, "/../public/stats.html"));
+
+    db.find(... = ...)
+
+    db.Post.findAll({
+      where: {
+        category: req.params.category
+      }
+    })
+
+    //query user info
+    //then do math for this
+
+    res.render("stats", {
+      quizOneProgress: 60
+    });
+
+  // //for updating the progress bar with handlebars
+  // $(".progress-bar").each(function(){
+  //   console.log($(this).attr("aria-valuenow"));
+   
+  //       //for each quiz id
+  //       //for each question id
+  //       //if question correct then add % 1/?? total of question.length
+  
+  // });
+  
+  });
+
+  //old code to redner stats page
+  // app.get("/stats", function(req, res) {
+  //   res.render(path.join(__dirname, "/../public/stats.html"));
+
+
+
+    //get to the quiz page
+  app.get("/quiz/:quizId", (req, res) => {
+    res.render("questions", {
+      quiz: req.params.quizId
+    });
   });
 
   // Render 404 page for any unmatched routes
