@@ -1,17 +1,35 @@
 //todo: add error handling to routes?
 // 1x3-2x0-3x4-4x2
-
+var formidable = require('formidable');
 var db = require("../models");
 
+<<<<<<< HEAD
 // grab current users correct string
 // parse it
 // if incoming qId is already in the string then do nothing
 // if its not then add it, in order
+=======
+module.exports = function (app) {
+  // Get all examples
+  app.get("/api/examples", function (req, res) {
+    db.Example.findAll({}).then(function (dbExamples) {
+      res.json(dbExamples);
+    });
+  });
+
+  // Create a new example
+  app.post("/api/examples", function (req, res) {
+    db.Example.create(req.body).then(function (dbExample) {
+      res.json(dbExample);
+    });
+  });
+>>>>>>> ed8b07c2496db4f7d20ed5b3e6d3affdfcc4ef33
 
 module.exports = function(app) {
   // route for submitting quiz question results
   app.post("/api/questions/result", (req, res) => {
     console.log(req.body);
+<<<<<<< HEAD
     db.Users.findOne({
       where: {
         id: req.body.userId
@@ -21,6 +39,11 @@ module.exports = function(app) {
       console.log(data.correct);
     });
     const jsonResponse = { msgFromServer: "Great job!!!" };
+=======
+    const jsonResponse = {
+      msgFromServer: "Great job!!!"
+    };
+>>>>>>> ed8b07c2496db4f7d20ed5b3e6d3affdfcc4ef33
     res.json(jsonResponse);
   });
 
@@ -61,21 +84,55 @@ module.exports = function(app) {
   });
 
   // create a new user
-  app.post("/api/newuser", (req, res) => {
-    console.log("hit the api/newuser POST route");
-    db.Users.create(req.body).then(data => {
-      res.json(data);
+  app.post("/api/signup", function (req, res) {
+
+    // Create a new instance of formidable to handle the request info
+    var form = new formidable.IncomingForm();
+
+    // parse information for form fields and incoming files
+    form.parse(req, function (err, fields) {
+      console.log(fields);
+
+      db.Users.create({
+        email: fields.email,
+        password: fields.password,
+        username: fields.username,
+      }).then(function (userInfo) {
+        // Upon successful signup, log user in
+        req.login(userInfo, function (err) {
+          if (err) {
+            console.log(err)
+            return res.status(422).json(err);
+          }
+          console.log(req.user);
+          return res.json("/members");
+        });
+      }).catch(function (err) {
+        console.log(err);
+        res.status(422).json(err);
+      });
     });
+
   });
 
-  //end db testing routes-----------------------------
-  //--------------------------------------------------
+  app.get("/logout", function (req, res) {
+    req.logout();
+    res.redirect("/");
+  });
 
-  app.delete("/api/examples/:id", function(req, res) {
-    db.Example.destroy({
-      where: { id: req.params.id }
-    }).then(function(dbExample) {
-      res.json(dbExample);
-    });
+  // Route for getting some data about our user to be used client side
+  app.get("/api/user_data", function (req, res) {
+    if (!req.user) {
+      // The user is not logged in, send back an empty object
+      res.json({});
+    } else {
+      // Otherwise send back the user's email and id
+      // Sending back a password, even a hashed password, isn't a good idea
+      res.json({
+        email: req.user.email,
+        id: req.user.id,
+        photo: req.user.photo
+      });
+    }
   });
 };
