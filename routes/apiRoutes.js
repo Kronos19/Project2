@@ -1,4 +1,5 @@
 //todo: add error handling to routes?
+// 1x3-2x0-3x4-4x2
 
 var db = require("../models");
 
@@ -15,6 +16,13 @@ module.exports = function(app) {
     db.Example.create(req.body).then(function(dbExample) {
       res.json(dbExample);
     });
+  });
+
+  // route for submitting quiz question results
+  app.post("/api/questions/result", (req, res) => {
+    console.log(req.body);
+    const jsonResponse = { msgFromServer: "Great job!!!" };
+    res.json(jsonResponse);
   });
 
   //------------------------------------------------
