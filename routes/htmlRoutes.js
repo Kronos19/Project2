@@ -1,89 +1,59 @@
 var db = require("../models");
-const path = require("path");
+var isAuthenticated = require("../config/middleware/isAuthenticated");
+var path = require("path");
 const sql = require("sequelize");
 
-module.exports = function(app) {
-  // Load index page
+module.exports = function (app) {
   app.get("/", function(req, res) {
-    db.Example.findAll({}).then(function(dbExamples) {
-      res.render("index", {
-        msg: "Welcome!",
-        examples: dbExamples
+      res.render("index.handlebars", {
+        msg: "Welcome!"
       });
-    });
+    
+  });
+  app.get("/signup", function (req, res) {
+    // If the user already has an account send them to the members page
+    if (req.user) {
+      return res.redirect("/members");
+    }
+    res.sendFile(path.join(__dirname, "../public/signup.html"));
   });
 
-  // Load example page and pass in an example by id
-  app.get("/example/:id", function(req, res) {
-    db.Example.findOne({
-      where: {
-        id: req.params.id
-      }
-    }).then(function(dbExample) {
-      res.render("example", {
-        example: dbExample
-      });
-    });
+  app.get("/login", function (req, res) {
+    // If the user already has an account send them to the members page
+    if (req.user) {
+      return res.redirect("/members");
+    }
+    res.sendFile(path.join(__dirname, "../public/login.html"));
   });
 
+  app.get("/members", isAuthenticated, function (req, res) {
+    console.log("members hit");
+    if (!req.user) {
+      return res.redirect("/");   
+    }
+    console.log("members hit 2");
+    res.sendFile(path.join(__dirname, "../public/members.html"));
+  })
 
-
-  // // To load the stats handlebars page for stats
   app.get("/stats", function(req, res) {
-
-    db.find(... = ...)
-
-    db.Post.findAll({
-      where: {
-        category: req.params.category
-      }
-    })
-
-    //call ID
-
-//the information we have to identify the correct answers for questions in a quiz are the primary key id for the question in said quiz in the db questions table and the string correct or incorrect depending on the answer
-
-//make a if stmt for whether the
-
-
-    //answer corect is a boolean, then check how many "true" for each 
-    //query user info
-    //then do math for this
-
-
-    // res.render("stats", {
-    //   quizOneProgress: 60
-    // });
-
-  // //for updating the progress bar with handlebars
-  // $(".progress-bar").each(function(){
-  //   console.log($(this).attr("aria-valuenow"));
-   
-  //       //for each quiz id
-  //       //for each question id
-  //       //if question correct then add % 1/?? total of question.length
-  
-  // });
-  
-  // });
-
-  //old code to render stats page
-  app.get("/stats", function(req, res) {
-    res.render("stats");
-
-
+    res.render("stats.handlebars");
+  });
 
     //get to the quiz page
   app.get("/quiz/:quizId", (req, res) => {
-    res.render("questions", {
-      quiz: req.params.quizId
-    });
+    if (!req.user) {
+      res.redirect("/login")
+    }
+    else {
+      res.render("questions.handlebars", {
+        quiz: req.params.quizId
+      });
+    }
   });
 
-  // Render 404 page for any unmatched routes
-  app.get("*", function(req, res) {
+   //Render 404 page for any unmatched routes
+   app.get("*", function (req, res) {
     console.log("hit the star route");
     res.render("404");
-  });
   });
 };

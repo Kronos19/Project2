@@ -44,7 +44,6 @@
  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.5.1/marked.min.js"></script>
 <script>
   // TODO: 
-  // submit data to server
   // handle possible incorrect quizId
   // fix answerWasCorrect msg
   // BUG: four answer choices dont display on questions with code snippets
@@ -62,6 +61,7 @@
   let quests;
   let numberCorrect = 0;
   let numberIncorrect = 0;
+  let questsLength;
   
   function getQuizQuestions(quizId) {
     console.log("getQuizQuestionsCalled");
@@ -71,6 +71,7 @@
     }).then((data)=>{
       console.log(data);
       quests = data;
+      questsLength = quests.length;
       displayNew(data, questIndex);
     }).catch((err)=>{
       console.log(err);
@@ -83,9 +84,13 @@
     clearChildren(questionDisplay);
     clearChildren(codeBlockDisplay);
     clearChildren(answerDisplay);
+    if (index < questsLength){
     writeQuestionToPage(quests[index]);
     writeAnswersToPage(quests[index]);
     if (quests[index].codeBlock) writeCodeBlockToPage(quests[index]);
+    } else {
+      displayFinalMsg();
+    }
   }
 
   function writeQuestionToPage(q) {
@@ -105,7 +110,7 @@
       let answerChoice = document.createElement("p");
       answerChoice.value = i;
       answerChoice.textContent = ansArr[i];
-      answerChoice.classList.add("answer-choice"); // to add css later
+      answerChoice.classList.add("answer-choice");
       answerChoice.addEventListener("click",(e)=>{
         handleAnswer(e.target.value);
       });
@@ -149,10 +154,17 @@
   }
   function setFeedback(q, answerWasCorrect){
     console.log("setFeedback called")
-    //lastResultDisplay, lastQuestionDisplay, lastCorrectDisplay
     lastResultDisplay.textContent = answerWasCorrect;
     lastQuestionDisplay.textContent = q.question;
     lastCorrectDisplay.textContent = q.correct;
+  }
+
+  function displayFinalMsg(){
+    questionDisplay.textContent = "Quiz completed. Go back to your stats page to see how your progress has changed";
+    const newLink = document.createElement("a");
+    newLink.href="../stats";
+    newLink.textContent = "Click here to see your updated stats!";
+    answerDisplay.appendChild(newLink);
   }
 
   // utility functions
