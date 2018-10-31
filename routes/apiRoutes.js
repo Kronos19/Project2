@@ -2,6 +2,7 @@
 // 1x3-2x0-3x4-4x2
 var formidable = require('formidable');
 var db = require("../models");
+var passport = require("passport");
 
 function insert(str, n) {
   if (str == "" || str == null) return n.toString();
@@ -18,6 +19,7 @@ function insert(str, n) {
 module.exports = function(app) {
   // route for submitting quiz question results
   app.post("/api/questions/result", (req, res) => {
+<<<<<<< HEAD
     console.log(req.body);
     db.Users.findOne({
       where: {
@@ -29,6 +31,12 @@ module.exports = function(app) {
       console.log(err);
     });
     const jsonResponse = { msgFromServer: "Great job!!!" };
+=======
+    console.log(req.user.id);
+    const jsonResponse = {
+      msgFromServer: "Great job!!!"
+    };
+>>>>>>> 47529029f19011dca1d52a5dff002a7537b6d8fa
     res.json(jsonResponse);
   });
 
@@ -68,7 +76,16 @@ module.exports = function(app) {
     });
   });
 
+<<<<<<< HEAD
   
+=======
+  app.post("/api/login", passport.authenticate("local"), function (req, res) {
+    console.log(req.user);
+    console.log("hi");
+
+    res.json("/members");
+  });
+>>>>>>> 47529029f19011dca1d52a5dff002a7537b6d8fa
 
   // create a new user
   app.post("/api/signup", function (req, res) {
@@ -118,7 +135,7 @@ module.exports = function(app) {
       res.json({
         email: req.user.email,
         id: req.user.id,
-        photo: req.user.photo
+        username: req.user.username,
       });
     }
   });
