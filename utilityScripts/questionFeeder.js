@@ -1,6 +1,6 @@
 const fs = require("fs");
 const request = require("request");
-const url = "http://localhost:3000/api/newquest";
+const url = "https://frightful-spider-64495.herokuapp.com/api/newquest";
 const topics = [
   "console/bash",
   "html/css/git",

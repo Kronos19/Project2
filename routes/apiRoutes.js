@@ -16,7 +16,6 @@ function insert(str, n) {
   return pieces.join("-");
 }
 
-<<<<<<< HEAD
 module.exports = function (app) {
   // route for submitting quiz question results
   app.post("/api/questions/result", (req, res) => {
@@ -48,8 +47,6 @@ module.exports = function (app) {
     }
   });
 
-=======
->>>>>>> 49bbf08856ec66b818ad1d0a54bfcce69bd7a8f6
   //------------------------------------------------
   //db testing routes for our models----------------
 
