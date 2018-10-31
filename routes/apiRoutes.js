@@ -19,15 +19,6 @@ module.exports = function (app) {
     });
   });
 
-  // route for submitting quiz question results
-  app.post("/api/questions/result", (req, res) => {
-    console.log(req.user.id);
-    const jsonResponse = {
-      msgFromServer: "Great job!!!"
-    };
-    res.json(jsonResponse);
-  });
-
   //------------------------------------------------
   //db testing routes for our models----------------
 
@@ -47,6 +38,7 @@ module.exports = function (app) {
     }).then(data => {
       res.json(data);
     });
+
   });
 
   // create a new question
@@ -114,6 +106,39 @@ module.exports = function (app) {
     pieces.splice(i, 0, n);
     return pieces.join("-");
   }
+
+  app.post("/api/questions/result", (req, res) => {
+    if (req.body.result == "correct") {
+      db.Users.findOne({
+        where: {
+          id: req.user.id
+        }
+      }).then(data => {
+        console.log(data.username);
+        console.log(data.correct);
+        const updatedString = insert(data.correct, req.body.id);
+        db.Users.update({
+          correct: updatedString
+        }, {
+          where: {
+            id: req.user.id
+          }
+        }).then((d2) => {
+          res.json({
+            msg: "yup!"
+          });
+        }).catch(err1 => {
+          console.log(err1);
+        })
+      }).catch(err => {
+        console.log(err);
+      });
+    } else {
+      res.json({
+        msg: "sorry!"
+      });
+    }
+  });
 
   app.get("/logout", function (req, res) {
     req.logout();

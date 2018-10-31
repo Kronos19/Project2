@@ -4,6 +4,10 @@ var path = require("path");
 const sql = require("sequelize");
 
 module.exports = function (app) {
+  app.get("/", function (req, res) {
+    res.sendFile(path.join(__dirname, "../public/main.html"));
+  });
+
   app.get("/signup", function (req, res) {
     // If the user already has an account send them to the members page
     if (req.user) {
@@ -21,9 +25,11 @@ module.exports = function (app) {
   });
 
   app.get("/members", isAuthenticated, function (req, res) {
+    console.log("members hit");
     if (!req.user) {
       return res.redirect("/");   
     }
+    console.log("members hit 2");
     res.sendFile(path.join(__dirname, "../public/members.html"));
   })
 
@@ -33,9 +39,14 @@ module.exports = function (app) {
 
     //get to the quiz page
   app.get("/quiz/:quizId", (req, res) => {
-    res.render("questions.handlebars", {
-      quiz: req.params.quizId
-    });
+    if (!req.user) {
+      res.redirect("/login")
+    }
+    else {
+      res.render("questions.handlebars", {
+        quiz: req.params.quizId
+      });
+    }
   });
 
    //Render 404 page for any unmatched routes
