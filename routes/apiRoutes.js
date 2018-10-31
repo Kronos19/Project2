@@ -16,28 +16,35 @@ function insert(str, n) {
   return pieces.join("-");
 }
 
-module.exports = function(app) {
+module.exports = function (app) {
   // route for submitting quiz question results
   app.post("/api/questions/result", (req, res) => {
-<<<<<<< HEAD
-    console.log(req.body);
-    db.Users.findOne({
-      where: {
-        id: req.user.id
-      }
-    }).then(data => {
-      console.log(data);
-    }).catch(err => {
-      console.log(err);
-    });
-    const jsonResponse = { msgFromServer: "Great job!!!" };
-=======
-    console.log(req.user.id);
-    const jsonResponse = {
-      msgFromServer: "Great job!!!"
-    };
->>>>>>> 47529029f19011dca1d52a5dff002a7537b6d8fa
-    res.json(jsonResponse);
+    if (req.body.result == "correct") {
+      db.Users.findOne({
+        where: {
+          id: req.user.id
+        }
+      }).then(data => {
+        console.log(data.username);
+        console.log(data.correct);
+        const updatedString = insert(data.correct, req.body.id);
+        db.Users.update({
+          correct: updatedString
+        }, {
+          where: {
+            id: req.user.id
+          }
+        }).then((d2) => {
+          res.json({msg: "yup!"});
+        }).catch(err1 => {
+          console.log(err1);
+        })
+      }).catch(err => {
+        console.log(err);
+      });
+    } else {
+      res.json({msg: "sorry!"});
+    }
   });
 
   //------------------------------------------------
@@ -76,16 +83,12 @@ module.exports = function(app) {
     });
   });
 
-<<<<<<< HEAD
-  
-=======
   app.post("/api/login", passport.authenticate("local"), function (req, res) {
     console.log(req.user);
     console.log("hi");
 
     res.json("/members");
   });
->>>>>>> 47529029f19011dca1d52a5dff002a7537b6d8fa
 
   // create a new user
   app.post("/api/signup", function (req, res) {

@@ -136,7 +136,6 @@
   function sendData(questionId, answerWasCorrect){
     console.log("sendData called");
     const outboundData = {
-      userId: 1,
       id: questionId,
       result: answerWasCorrect ? "correct" : "incorrect"
     }
