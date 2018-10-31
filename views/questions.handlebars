@@ -1,12 +1,14 @@
 <div class="container">
   <div class="row">
     <div class="col-md-4">
-      <p>This is quiz <span id="quiz-id">{{quiz}}</span></p>
+      <p>Quiz Questions <span id="quiz-id">{{quiz}}</span></p>
       <p>
-        Your answer for the last question was <span id="last-result"></span>
+        Previous Question <span id="last-result"></span>
       </p>
       <h5>The last question was:</h5>
       <p id="last-question"></p>
+      <h5>Your last answer was</h5>
+      <p id="last-answer"></p>
       <h5>The correct answer was:</h5>
       <p id="last-correct"></p>
     </div>
@@ -180,7 +182,7 @@
     arr[j] = tmp;
   }
 
-  getQuizQuestions(quizId);
+   getQuizQuestions(quizId);
   
 
 
