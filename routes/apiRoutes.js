@@ -16,6 +16,7 @@ function insert(str, n) {
   return pieces.join("-");
 }
 
+<<<<<<< HEAD
 module.exports = function (app) {
   // route for submitting quiz question results
   app.post("/api/questions/result", (req, res) => {
@@ -47,6 +48,8 @@ module.exports = function (app) {
     }
   });
 
+=======
+>>>>>>> 49bbf08856ec66b818ad1d0a54bfcce69bd7a8f6
   //------------------------------------------------
   //db testing routes for our models----------------
 
@@ -66,6 +69,7 @@ module.exports = function (app) {
     }).then(data => {
       res.json(data);
     });
+
   });
 
   // create a new question
@@ -89,6 +93,7 @@ module.exports = function (app) {
 
     res.json("/members");
   });
+
 
   // create a new user
   app.post("/api/signup", function (req, res) {
@@ -119,7 +124,51 @@ module.exports = function (app) {
         res.status(422).json(err);
       });
     });
+  });
 
+  function insert(str, n) {
+    if (str == "" || str == null) return n.toString();
+    const pieces = str.split("-");
+    let i = 0;
+    while (n > parseInt(pieces[i])) {
+      i++;
+    }
+    if (parseInt(pieces[i]) == n) return str;
+    pieces.splice(i, 0, n);
+    return pieces.join("-");
+  }
+
+  app.post("/api/questions/result", (req, res) => {
+    if (req.body.result == "correct") {
+      db.Users.findOne({
+        where: {
+          id: req.user.id
+        }
+      }).then(data => {
+        console.log(data.username);
+        console.log(data.correct);
+        const updatedString = insert(data.correct, req.body.id);
+        db.Users.update({
+          correct: updatedString
+        }, {
+          where: {
+            id: req.user.id
+          }
+        }).then((d2) => {
+          res.json({
+            msg: "yup!"
+          });
+        }).catch(err1 => {
+          console.log(err1);
+        })
+      }).catch(err => {
+        console.log(err);
+      });
+    } else {
+      res.json({
+        msg: "sorry!"
+      });
+    }
   });
 
   app.get("/logout", function (req, res) {
