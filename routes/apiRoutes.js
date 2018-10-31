@@ -71,6 +71,7 @@ module.exports = function (app) {
     res.json("/members");
   });
 
+
   // create a new user
   app.post("/api/signup", function (req, res) {
 
@@ -100,8 +101,19 @@ module.exports = function (app) {
         res.status(422).json(err);
       });
     });
-
   });
+
+  function insert(str, n) {
+    if (str == "" || str == null) return n.toString();
+    const pieces = str.split("-");
+    let i = 0;
+    while (n > parseInt(pieces[i])) {
+      i++;
+    }
+    if (parseInt(pieces[i]) == n) return str;
+    pieces.splice(i, 0, n);
+    return pieces.join("-");
+  }
 
   app.get("/logout", function (req, res) {
     req.logout();
