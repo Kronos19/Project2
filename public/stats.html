@@ -12,13 +12,14 @@
     <!-- might need to get rid of cross origin and integrity, ask Alex -->
     <div class="topnav">
         <a class="active" href="#home">Home</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
+        
         <div class="login-container">
           <form action="/action_page.php">
-            <input type="text" placeholder="Username" name="username">
-            <input type="text" placeholder="Password" name="psw">
-            <button type="submit">Login</button>
+            
+                
+                <span id="displayUser"></span>
+                
+            <button type="submit">Logout</button>
           </form>
         </div>
       </div>
@@ -32,7 +33,7 @@
         <div class="list-group">
 
           <!-- Quiz#1 -->
-          <a href="#" class="list-group-item list-group-item-action">Dapibus ac facilisis in
+          <a href="#" class="list-group-item list-group-item-action">Quiz # 1
             <br>
             <!-- progress bar -->
             <div class="progress">
@@ -43,8 +44,7 @@
           </a>
 
           <!-- Quiz#2 -->
-          <a href="#" class="list-group-item list-group-item-action list-group-item-action">A simple primary list
-            group item
+          <a href="#" class="list-group-item list-group-item-action list-group-item-action">Quiz # 2
             <br>
             <!-- progress bar -->
             <div class="progress">
@@ -56,8 +56,8 @@
           </a>
 
           <!-- Quiz#3 -->
-          <a href="#" class="list-group-item list-group-item-action list-group-item-action">A simple primary list
-              group item
+          <a href="#" class="list-group-item list-group-item-action list-group-item-action">Quiz # 3
+              
               <br>
               <!-- progress bar -->
               <div class="progress">
@@ -69,8 +69,7 @@
             </a>
 
             <!-- Quiz#4 -->
-            <a href="#" class="list-group-item list-group-item-action list-group-item-action">A simple primary list
-                group item
+            <a href="#" class="list-group-item list-group-item-action list-group-item-action">Quiz # 4
                 <br>
                 <!-- progress bar -->
                 <div class="progress">
@@ -82,8 +81,7 @@
               </a>
 
               <!-- Quiz#5 -->
-              <a href="#" class="list-group-item list-group-item-action list-group-item-action">A simple primary list
-                  group item
+              <a href="#" class="list-group-item list-group-item-action list-group-item-action">Quiz # 5
                   <br>
                   <!-- progress bar -->
                   <div class="progress">
@@ -95,8 +93,7 @@
                 </a>
 
                 <!-- Quiz#6 -->
-                <a href="#" class="list-group-item list-group-item-action list-group-item-action">A simple primary list
-                    group item
+                <a href="#" class="list-group-item list-group-item-action list-group-item-action">Quiz # 6
                     <br>
                     <!-- progress bar -->
                     <div class="progress">
@@ -108,8 +105,7 @@
                   </a>
 
                   <!-- Quiz#7 -->
-                  <a href="#" class="list-group-item list-group-item-action list-group-item-action">A simple primary list
-                      group item
+                  <a href="#" class="list-group-item list-group-item-action list-group-item-action">Quiz # 7
                       <br>
                       <!-- progress bar -->
                       <div class="progress">
@@ -122,7 +118,8 @@
 
           <br>
 
-          <button type="button" class="btn btn-primary m-1 p-2" id="reload">reload</button>
+          <button class="purp btn m-1 p-2" 
+          id="reload">reload</button>
 
           <br>
 
@@ -141,81 +138,41 @@
         <!-- div for User Info -->
         <div class="row justify-content-center">
           <div class="name col 10">
-            Username: XXXXXXXXX Rank: XX (add span tag for jquery)
+            
           </div>
 
            <!-- logout -->
-        <div class="row col-2">
-          <button type="button" class="btn btn-primary" id="logout">logout</button>
-        </div>
+        
         </div>
 
         <br>
 
-        <!-- Buttons row 1 -->
-        <div class="row justify-content-center">
-          <!-- col and row below name, next to container left -->
-          <button type="button" class="btn btn-primary m-1 p-2" id="quiz1">Quiz 1
-            
-          </button>
-          <button type="button" class="btn btn-primary m-1 p-2" id="quiz2">Quiz 2</button>
-          <button type="button" class="btn btn-primary m-1 p-2" id="quiz3">Quiz 3</button>
-        </div>
-
-        <br>
-
-        <!-- Buttons row 2 -->
-        <div class="row justify-content-center">
-          <!-- col and row below name, next to container left -->
-          <button type="button" class="btn btn-primary m-1 p-2" id="quiz4">Quiz 4</button>
-          <button type="button" class="btn btn-primary m-1 p-2" id="quiz5">Quiz 5</button>
-          <button type="button" class="btn btn-primary m-1 p-2" id="quiz6">Quiz 6</button>
-        </div>
-
-        <br>
-
-        <!-- Buttons row 2 -->
-        <div class="row justify-content-center">
-          <!-- col and row below name, next to container left -->
-          <button type="button" class="btn btn-primary m-1 p-2" id="quiz7">Quiz 7</button>
-        </div>
-
-        <!-- div container left -->
-      </div>
-
-      <!-- div whole row -->
+        
+    <!-- Buttons row 1 -->
+    <div class="row justify-content-center">
+      <!-- col and row below name, next to container left -->
+       <a href="quiz/1" class="purp btn  m-1 p-2" id="quiz1">Quiz 1</a>
+      <a href="quiz/2" class="purp btn  m-1 p-2" id="quiz2">Quiz 2</a>
+      <a href="quiz/3" class="purp btn  m-1 p-2" id="quiz3">Quiz 3</a>
     </div>
 
-    <!-- div whole container -->
-  </div>
+    <br>
 
-  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-    crossorigin="anonymous"></script>
-  <script>
-    //this would go with the login page, already have the route set up on the htmlRoutes.js
+    <!-- Buttons row 2 -->
+    <div class="row justify-content-center">
+      <!-- col and row below name, next to container left -->
+      <a href="quiz/4" class="purp btn btn-primary m-1 p-2" id="quiz4">Quiz 4</a>
+      <a href="quiz/5" class="purp btn btn-primary m-1 p-2" id="quiz5">Quiz 5</a>
+      <a href="quiz/6" class="purp btn btn-primary m-1 p-2" id="quiz6">Quiz 6</a>
+    </div>
 
-    // $("btn1").on("click", function() {
-    //   // call api html route for page, 
-    // });
+    <br>
 
-    //progress bar for each quiz (use counter based on the count of questions complete in the sql db, and every time the page is reloaded refresh the progress bar/ and every time a bar is pressed reload the indivual db)
-    //have it be a for loop to go through the progress of each quiz that updates when the page is called on
-    //need to require the js page for the login page...
-
-    // $("btn for sign in").on("click", function() {
-    //   //either for each or tag or for with a look into the tag
-      
-      
-      // $("#reload").on("click", function() {
-      //   $(".progress-bar").each(function(){
-      //     console.log($(this).attr("aria-valuenow"));
-      //   });
-      // });
-      
-      //maybe name each div, and set the attribute again each time
-
-    //   }
-    // });
+    <!-- Buttons row 3 -->
+    <div class="row justify-content-center">
+      <!-- col and row below name, next to container left -->
+      <a href="quiz/7" class="purp btn btn-primary m-1 p-2" id="quiz7">Quiz 7</a>
+    </div>
     
   </script>
 </body>
