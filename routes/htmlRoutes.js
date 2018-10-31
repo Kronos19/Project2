@@ -28,19 +28,19 @@ module.exports = function (app) {
   })
 
   app.get("/stats", function(req, res) {
-    res.render("stats");
+    res.render("stats.handlebars");
   });
 
     //get to the quiz page
   app.get("/quiz/:quizId", (req, res) => {
-    res.render("questions", {
+    res.render("questions.handlebars", {
       quiz: req.params.quizId
     });
   });
 
-   // Render 404 page for any unmatched routes
-  //  app.get("*", function (req, res) {
-  //   console.log("hit the star route");
-  //   res.render("404.handlebars");
-  // });
+   //Render 404 page for any unmatched routes
+   app.get("*", function (req, res) {
+    console.log("hit the star route");
+    res.render("404.handlebars");
+  });
 }

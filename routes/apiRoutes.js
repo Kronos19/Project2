@@ -21,7 +21,7 @@ module.exports = function (app) {
 
   // route for submitting quiz question results
   app.post("/api/questions/result", (req, res) => {
-    console.log(req.body);
+    console.log(req.user.id);
     const jsonResponse = {
       msgFromServer: "Great job!!!"
     };
@@ -67,7 +67,7 @@ module.exports = function (app) {
   app.post("/api/login", passport.authenticate("local"), function (req, res) {
     console.log(req.user);
     console.log("hi");
-    
+
     res.json("/members");
   });
 
