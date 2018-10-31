@@ -3,10 +3,17 @@
 var formidable = require('formidable');
 var db = require("../models");
 
-// grab current users correct string
-// parse it
-// if incoming qId is already in the string then do nothing
-// if its not then add it, in order
+function insert(str, n) {
+  if (str == "" || str == null) return n.toString();
+  const pieces = str.split("-");
+  let i = 0;
+  while (n > parseInt(pieces[i])) {
+    i++;
+  }
+  if (parseInt(pieces[i]) == n) return str;
+  pieces.splice(i, 0, n);
+  return pieces.join("-");
+}
 
 module.exports = function(app) {
   // route for submitting quiz question results
@@ -14,7 +21,7 @@ module.exports = function(app) {
     console.log(req.body);
     db.Users.findOne({
       where: {
-        id: req.body.userId
+        id: req.user.id
       }
     }).then(data => {
       console.log(data);
