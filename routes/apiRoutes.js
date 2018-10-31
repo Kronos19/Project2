@@ -4,19 +4,47 @@ var formidable = require('formidable');
 var db = require("../models");
 var passport = require("passport");
 
-module.exports = function (app) {
-  // Get all examples
-  app.get("/api/examples", function (req, res) {
-    db.Example.findAll({}).then(function (dbExamples) {
-      res.json(dbExamples);
-    });
-  });
+function insert(str, n) {
+  if (str == "" || str == null) return n.toString();
+  const pieces = str.split("-");
+  let i = 0;
+  while (n > parseInt(pieces[i])) {
+    i++;
+  }
+  if (parseInt(pieces[i]) == n) return str;
+  pieces.splice(i, 0, n);
+  return pieces.join("-");
+}
 
-  // Create a new example
-  app.post("/api/examples", function (req, res) {
-    db.Example.create(req.body).then(function (dbExample) {
-      res.json(dbExample);
-    });
+module.exports = function (app) {
+  // route for submitting quiz question results
+  app.post("/api/questions/result", (req, res) => {
+    if (req.body.result == "correct") {
+      db.Users.findOne({
+        where: {
+          id: req.user.id
+        }
+      }).then(data => {
+        console.log(data.username);
+        console.log(data.correct);
+        const updatedString = insert(data.correct, req.body.id);
+        db.Users.update({
+          correct: updatedString
+        }, {
+          where: {
+            id: req.user.id
+          }
+        }).then((d2) => {
+          res.json({msg: "yup!"});
+        }).catch(err1 => {
+          console.log(err1);
+        })
+      }).catch(err => {
+        console.log(err);
+      });
+    } else {
+      res.json({msg: "sorry!"});
+    }
   });
 
   //------------------------------------------------
@@ -29,7 +57,7 @@ module.exports = function (app) {
     });
   });
 
-  // get a question where quizId = x
+  // get all question where quizId = x
   app.get("/api/quiz/:quizId", (req, res) => {
     db.Questions.findAll({
       where: {

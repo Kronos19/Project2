@@ -1,6 +1,6 @@
 const fs = require("fs");
 const request = require("request");
-const url = "http://localhost:8080/api/newquest";
+const url = "http://localhost:3000/api/newquest";
 const topics = [
   "console/bash",
   "html/css/git",
