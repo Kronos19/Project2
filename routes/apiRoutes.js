@@ -3,6 +3,7 @@
 var formidable = require('formidable');
 var db = require("../models");
 var passport = require("passport");
+const Op = require("sequelize").Op;
 
 module.exports = function (app) {
   //------------------------------------------------
