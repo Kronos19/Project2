@@ -125,6 +125,40 @@ module.exports = function (app) {
     }
   });
 
+  //for the progress bar data
+  app.get("/api/stats", function (req, res) {
+    // queried correct answers
+    db.Users.findOne({
+        where: {
+          id: req.user.id
+        },
+        attributes: ["correct"]
+      })
+      .then(function (correctAnswers) {
+        // console.log(correctAnswers);
+        //find out calc for total quiz # for then calc of %'s below
+        const correct = correctAnswers.correct.split("-");
+        console.log(correct);
+        return db.Questions.findAll({
+          attributes: ["quizId"],
+          where: {
+            id: {
+              [Op.or]: correct
+            }
+          }
+        });
+      })
+      .then(function (questionQuizIds) {
+        //======================
+        console.log(questionQuizIds);
+        res.json(questionQuizIds);
+      })
+      .catch(function (err) {
+        console.log(err);
+        res.json(err);
+      });
+  });
+
   app.get("/logout", function (req, res) {
     req.logout();
     res.redirect("/");
