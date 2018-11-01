@@ -35,9 +35,9 @@ module.exports = function (app) {
 
   app.get("/stats", function(req, res) {
     if (!req.user) {
-    res.sendFile(path.join(__dirname, "../public/stats.html"));
+      return res.redirect("/")
     } else {
-      return res.redirect("/");
+      res.sendFile(path.join(__dirname, "../public/stats.html"));
     }
   });
 
