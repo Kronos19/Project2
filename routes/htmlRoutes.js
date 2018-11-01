@@ -34,7 +34,11 @@ module.exports = function (app) {
   })
 
   app.get("/stats", function(req, res) {
-    res.render("stats.html");
+    if (!req.user) {
+    res.sendFile(path.join(__dirname, "../public/stats.html"));
+    } else {
+      return res.redirect("/");
+    }
   });
 
     //get to the quiz page
