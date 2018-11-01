@@ -45,7 +45,6 @@ module.exports = function (app) {
   app.post("/api/login", passport.authenticate("local"), function (req, res) {
     console.log(req.user);
     console.log("hi");
-
     res.json("/stats");
   });
 
