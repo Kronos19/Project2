@@ -46,7 +46,7 @@ module.exports = function (app) {
     console.log(req.user);
     console.log("hi");
 
-    res.json("/members");
+    res.json("/stats");
   });
 
 
@@ -72,7 +72,7 @@ module.exports = function (app) {
             return res.status(422).json(err);
           }
           console.log(req.user);
-          return res.json("/members");
+          return res.json("/stats");
         });
       }).catch(function (err) {
         console.log(err);

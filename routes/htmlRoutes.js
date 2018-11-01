@@ -34,7 +34,7 @@ module.exports = function (app) {
   })
 
   app.get("/stats", function(req, res) {
-    res.render("stats.handlebars");
+    res.render("stats.html");
   });
 
     //get to the quiz page
