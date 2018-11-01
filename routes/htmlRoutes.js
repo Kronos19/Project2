@@ -5,11 +5,9 @@ const sql = require("sequelize");
 
 module.exports = function (app) {
   app.get("/", function(req, res) {
-      res.render("index.handlebars", {
-        msg: "Welcome!"
-      });
-    
+    res.sendFile(path.join(__dirname, "../public/main.html"));
   });
+
   app.get("/signup", function (req, res) {
     // If the user already has an account send them to the members page
     if (req.user) {
@@ -51,9 +49,9 @@ module.exports = function (app) {
     }
   });
 
-   //Render 404 page for any unmatched routes
-   app.get("*", function (req, res) {
-    console.log("hit the star route");
-    res.render("404");
-  });
+  //  //Render 404 page for any unmatched routes
+  //  app.get("*", function (req, res) {
+  //   console.log("hit the star route");
+  //   res.render("404");
+  // });
 };
