@@ -46,7 +46,7 @@ module.exports = function (app) {
     console.log(req.user);
     console.log("hi");
 
-    res.json("/members");
+    res.redirect("/members");
   });
 
 
