@@ -24,15 +24,6 @@ module.exports = function (app) {
     res.sendFile(path.join(__dirname, "../public/login.html"));
   });
 
-  app.get("/members", isAuthenticated, function (req, res) {
-    console.log("members hit");
-    if (!req.user) {
-      return res.redirect("/");   
-    }
-    console.log("members hit 2");
-    res.sendFile(path.join(__dirname, "../public/members.html"));
-  })
-
   app.get("/stats", function(req, res) {
     if (!req.user) {
       return res.redirect("/")
